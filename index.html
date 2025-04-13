@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#FFD700", secondary: "#4A4A4A" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+    body {
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 50px 50px 50px 50px; /* Added margin in all directions */
+    }
+      h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      }
+      
+      .sidebar {
+      background-color: #1E1E1E;
+      min-height: 100vh;
+      width: 25%;
+      border-radius: 0 15% 15% 0;
+      overflow-y: auto; /* Enable scrolling if content exceeds height */
+      position: sticky; /* Make it static at the end */
+      top: 0; /* Stick to the top while scrolling */
+      }
+      .main-content {
+      width: 75%;
+      min-height: 100vh;
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          border-radius: 0;
+          min-height: auto;
+        }
+        .main-content {
+          width: 100%;
+        }
+      }
+      .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+      }
+      .nav-link.active {
+      color: #FFD700;
+      }
+      .nav-link:hover {
+      color: #FFD700;
+      }
+      .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #FFD700;
+      transition: width 0.3s ease;
+      }
+      .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      }
+      .service-card {
+      background-color: #1E1E1E;
+      transition: all 0.3s ease;
+      height: 100%;
+      }
+      .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .icon-container {
+      color: #FFD700;
+      }
+      input, textarea {
+      background-color: #1E1E1E;
+      border: 1px solid #333;
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+      }
+      input:focus, textarea:focus {
+      border-color: #FFD700;
+      }
+      .submit-btn {
+      background-color: #FFD700;
+      color: #121212;
+      transition: all 0.3s ease;
+      }
+      .submit-btn:hover {
+      background-color: #E5C100;
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          min-height: auto;
+        }
+        .main-content {
+          width: 100%;
+        }
+        .service-grid {
+          grid-template-columns: 1fr;
+        }
+        .flex-col-reverse {
+          flex-direction: column-reverse;
+        }
+      }
+    </style>
+    <style>
+      @media (max-width: 768px) {
+        body {
+          transform: scale(0.65); /* Scale down to 65% (35% smaller) */
+          transform-origin: top left; /* Adjust the origin for scaling */
+        }
+      }
+    </style>
+    <style>
+      /* Custom CSS to hide scrollbars */
+      .hide-scrollbar {
+        scrollbar-width: none; /* For Firefox */
+        -ms-overflow-style: none; /* For Internet Explorer and Edge */
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-col md:flex-row min-h-screen">
+      <!-- Sidebar -->
+      <div class="sidebar p-8 flex flex-col items-center justify-between ml-4 hide-scrollbar md:w-1/4 w-full">
+        <div class="w-full flex flex-col items-center">
+          <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden mb-6">
+            <img
+              src="Untitled design (1).jpg"
+              alt="Profile Picture"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold mb-2">Vivek Rai</h1>
+          <div class="bg-gray-800 text-sm px-4 py-2 rounded-full mb-8">
+            <div class="text-center">
+              Tech Enthusiast | Transforming Ideas into Impactful Solutions.
+            </div>
+          </div>
+          <div class="w-full border-t border-gray-700 my-6"></div>
+          <!-- Contact Information -->
+          <div class="w-full space-y-6 mb-8">
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex items-center justify-center mr-4">
+                <i class="ri-mail-line text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">EMAIL</p>
+                <p>vivekrai2416@gmail.com</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex items-center justify-center mr-4">
+                <i class="ri-phone-line text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">PHONE</p>
+                <p>+91 (935) 463-2327</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex items-center justify-center mr-4">
+                <i class="ri-calendar-line text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">BIRTHDAY</p>
+                <p>April 04, 2005</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="w-10 h-10 flex items-center justify-center mr-4">
+                <i class="ri-map-pin-line text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">LOCATION</p>
+                <p>Greater Noida, Uttar Pradesh, India</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full border-t border-gray-700 my-6"></div>
+          <!-- Social Media Links -->
+          <div class="flex space-x-4 mt-4">
+            <a
+              href="https://github.com/VivekRai-gif"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-gray-900 transition-all"
+            >
+              <i class="ri-github-fill"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/vivekrai-dev/"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-gray-900 transition-all"
+            >
+              <i class="ri-linkedin-fill"></i>
+            </a>
+            <a
+              href="https://x.com/Vivek_Rai_04?t=BO14d9N5J6wzjRmPG1QDUw&s=09"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-gray-900 transition-all"
+            >
+              <i class="ri-twitter-fill"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/_vivek_rai_04?igsh=NDRhcmEyZTM0anB5"
+              class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary hover:text-gray-900 transition-all"
+            >
+              <i class="ri-instagram-fill"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content md:w-3/4 w-full">
+        <!-- Navigation -->
+        <nav
+          class="sticky top-0 z-10 bg-[#121212] p-4 md:p-6 border-b border-gray-800"
+        >
+          <div class="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8">
+            <a href="#about" class="nav-link active">About</a>
+            <a href="#resume" class="nav-link">Resume</a>
+            <a href="#portfolio" class="nav-link">Portfolio</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+        </nav>
+        <!-- About Section -->
+        <section id="about" class="py-12 px-8 md:px-16">
+          <h2 class="text-4xl font-bold mb-4">About Me</h2>
+          <div class="w-20 h-1 bg-primary mb-8"></div>
+          <div class="space-y-6 max-w-3xl">
+            <p class="text-gray-300 leading-relaxed">
+              Passionate about Web Development, AI/ML, and Cloud Computing, with a strong focus on innovation, real-world problem-solving, and continuous learning. I thrive in collaborative spaces, lead with creativity, and build tech that makes an impact.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+              I thrive in high-pressure hackathon settings, building scalable full-stack solutions using web tech, AI, and cloud. Always exploring emerging tech to innovate, collaborate, and drive real-world impact.
+
+            </p>
+          </div>
+          <h3 class="text-3xl font-bold mt-16 mb-8">What I'm Doing</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 service-grid">
+            <!-- Web Design Card -->
+            <div class="service-card p-6 rounded-lg">
+              <div class="flex items-start mb-4">
+                <div
+                  class="icon-container w-12 h-12 flex items-center justify-center mr-4"
+                >
+                  <i class="ri-palette-line text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold">Web Design</h4>
+              </div>
+              <p class="text-gray-400">
+                Experience cutting-edge design crafted with the highest quality
+                and professional expertise. I create responsive, user-friendly
+                interfaces that engage and convert.
+              </p>
+            </div>
+            <!-- Web Development Card -->
+            <div class="service-card p-6 rounded-lg">
+              <div class="flex items-start mb-4">
+                <div
+                  class="icon-container w-12 h-12 flex items-center justify-center mr-4"
+                >
+                  <i class="ri-code-s-slash-line text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold">Web Development</h4>
+              </div>
+              <p class="text-gray-400">
+                Specialized in high-quality, professional development of
+                websites and web applications, ensuring every project is
+                executed to the highest standards of performance and security.
+              </p>
+            </div>
+            <!-- Mobile Apps Card -->
+            <div class="service-card p-6 rounded-lg">
+              <div class="flex items-start mb-4">
+                <div
+                  class="icon-container w-12 h-12 flex items-center justify-center mr-4"
+                >
+                  <i class="ri-smartphone-line text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold">Mobile Apps</h4>
+              </div>
+              <p class="text-gray-400">
+                I specialize in developing native and cross-platform mobile
+                applications that deliver exceptional user experiences across
+                iOS and Android platforms with optimal performance.
+              </p>
+            </div>
+            <!-- Hackathons Card -->
+            <div class="service-card p-6 rounded-lg">
+              <div class="flex items-start mb-4">
+                <div
+                  class="icon-container w-12 h-12 flex items-center justify-center mr-4"
+                >
+                  <i class="ri-code-box-line text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold">Hackathons / Workshops</h4>
+              </div>
+              <p class="text-gray-400">
+                I dive into hackathons and tech workshops to learn, experiment, and grow through hands-on problem-solving and collaboration.
+              </p>
+            </div>
+          </div>
+          <!-- Testimonials Section -->
+          <div class="mt-20">
+            <h3 class="text-3xl font-bold mb-8">Testimonials</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Testimonial 1 -->
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                  <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img
+                      src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20asian%20male%20executive%20in%20business%20attire%2C%20confident%20smile%2C%20office%20background&width=100&height=100&seq=1&orientation=squarish"
+                      alt="Sarah Chen"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 class="font-semibold">Sarah Chen</h4>
+                    <p class="text-sm text-gray-400">CTO at TechVision Inc.</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 italic">
+                  "Alex combines strong technical skills with leadership, effectively solving complex problems while supporting team growth.."
+                </p>
+              </div>
+              <!-- Testimonial 2 -->
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                  <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img
+                      src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20female%20executive%2C%20warm%20smile%2C%20business%20formal%20attire%2C%20office%20setting&width=100&height=100&seq=2&orientation=squarish"
+                      alt="Emily Rodriguez"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 class="font-semibold">Emily Rodriguez</h4>
+                    <p class="text-sm text-gray-400">
+                      Project Manager at DevConnect
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-300 italic">
+                  "A dedicated professional with a focus on quality, innovation, and clear communication—consistently delivering exceptional results."
+                </p>
+              </div>
+              
+        </section>
+        <!-- Resume Section (Hidden by default) -->
+        <section id="resume" class="py-12 px-8 md:px-16 hidden">
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <h2 class="text-4xl font-bold mb-4">Resume</h2>
+              <div class="w-20 h-1 bg-primary"></div>
+            </div>
+            <a
+              href="#"
+              class="download-resume flex items-center gap-2 bg-primary hover:bg-opacity-90 text-gray-900 px-6 py-3 rounded-button font-semibold transition-all group relative overflow-hidden"
+              id="downloadCV"
+            >
+              <span class="relative z-10 flex items-center gap-2">
+              <i class="ri-download-2-line"></i>
+              Download CV
+              </span>
+              <div
+              class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"
+              ></div>
+            </a>
+            <script>
+              document.getElementById("downloadCV").addEventListener("click", function (e) {
+              e.preventDefault();
+              const link = document.createElement("a");
+              link.href = "vivek_rai.pdf"; // Path to the PDF file
+              link.download = "vivek_rai.pdf"; // File name for download
+              link.click();
+              });
+            </script>
+          </div>
+          <!-- Education -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-6">Education</h3>
+            <div class="space-y-6">
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">
+                    Bachelor of Technology in Computer Science
+                  </h4>
+                  <span class="text-primary">2023 - 2027</span>
+                </div>
+                <p class="text-gray-400 mb-2">
+                  Dronacharya group of institutions
+                </p>
+                <p class="text-gray-300">AKTU</p>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">
+                    Higher Secondary Education
+                  </h4>
+                  <span class="text-primary">2021 - 2023</span>
+                </div>
+                <p class="text-gray-400 mb-2">
+                 
+Govt. Sarvodaya Co-Ed Vidyalaya Sec 6 Rohini
+                </p>
+                <p class="text-gray-300">CBSE</p>
+              </div>
+            </div>
+          </div>
+          <!-- Experience -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-6">Experience</h3>
+            <div class="space-y-6">
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">Design Lead</h4>
+                  <span class="text-primary">2024 - Present</span>
+                </div>
+                <p class="text-gray-400 mb-4">StarkSeek India</p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                  <li>
+                    Led a team of 5 designers in creating user-centric
+                    interfaces for web and mobile applications
+                  </li>
+                  <li>
+                    Improved user engagement by 40% through implementation of
+                    responsive design principles
+                  </li>
+                  <li>
+                    Conducted weekly design reviews and mentored junior
+                    designers
+                  </li>
+                </ul>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">
+                   Web Developer Intern
+                  </h4>
+                  <span class="text-primary">Summer 2025</span>
+                </div>
+                <p class="text-gray-400 mb-4">hack4bihar</p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                  <li>
+                    Developed and maintained cloud-based applications using
+                    Azure services
+                  </li>
+                  <li>
+                    Implemented CI/CD pipelines reducing deployment time by 60%
+                  </li>
+                  <li>
+                    Collaborated with cross-functional teams to deliver features
+                    on schedule
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Skills -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-bold mb-6">Skills</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <h4 class="text-xl font-semibold mb-4">
+                  Programming Languages
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Python</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >JavaScript</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Java</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >C++</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >TypeScript</span
+                  >
+                </div>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <h4 class="text-xl font-semibold mb-4">Frameworks & Tools</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >React</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Node.js</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Django</span
+                  >
+                    <!-- <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Docker</span
+                    > -->
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Git</span
+                  >
+                </div>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <h4 class="text-xl font-semibold mb-4">Cloud & DevOps</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >AWS</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Azure</span
+                  >
+                  
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Jenkins</span
+                  >
+                </div>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <h4 class="text-xl font-semibold mb-4">Design & Others</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Figma</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Adobe XD</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >UI/UX</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Agile</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Certifications -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6">Certifications</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">
+                    AWS Certified Solutions Architect
+                  </h4>
+                  <span class="text-primary">2023</span>
+                </div>
+                <p class="text-gray-400">Amazon Web Services</p>
+              </div>
+              <div class="bg-[#1E1E1E] p-6 rounded-lg">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-xl font-semibold">
+                    Google Cloud Professional Developer
+                  </h4>
+                  <span class="text-primary">2023</span>
+                </div>
+                <p class="text-gray-400">Google Cloud Platform</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Portfolio Section (Hidden by default) -->
+        <section id="portfolio" class="py-12 px-8 md:px-16 hidden">
+          <h2 class="text-4xl font-bold mb-4">My Projects</h2>
+          <div class="w-20 h-1 bg-primary mb-8"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="bg-[#1E1E1E] rounded-lg overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20carpooling%20app%20interface%20design%2C%20minimalist%20UI%2C%20clean%20design%2C%20professional%20look&width=600&height=400&seq=10&orientation=landscape"
+                alt="Ride Together"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">Ride Together</h3>
+                <p class="text-gray-400 mb-4">
+                  A carpooling platform that connects travelers going in the
+                  same direction, reducing carbon footprint and travel costs.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >React</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Node.js</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >MongoDB</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="bg-[#1E1E1E] rounded-lg overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=AI%20facial%20recognition%20security%20system%20interface%2C%20futuristic%20UI%20design%2C%20professional&width=600&height=400&seq=11&orientation=landscape"
+                alt="Deep Fake Detection"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">
+                  Deep Fake Detection System
+                </h3>
+                <p class="text-gray-400 mb-4">
+                  AI-powered system that identifies manipulated videos and
+                  images using advanced machine learning algorithms.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Python</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >TensorFlow</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >OpenCV</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="bg-[#1E1E1E] rounded-lg overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=cloud%20computing%20dashboard%20interface%2C%20modern%20tech%20UI%2C%20professional&width=600&height=400&seq=12&orientation=landscape"
+                alt="Cloud Management"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">Cloud Resource Optimizer</h3>
+                <p class="text-gray-400 mb-4">
+                  Smart cloud resource management system that optimizes costs
+                  and performance across multiple cloud platforms.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >AWS</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Docker</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Kubernetes</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Project 4 -->
+            <div class="bg-[#1E1E1E] rounded-lg overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=AI%20chatbot%20interface%20design%2C%20modern%20messaging%20UI%2C%20professional&width=600&height=400&seq=13&orientation=landscape"
+                alt="AI Assistant"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">Smart Campus Assistant</h3>
+                <p class="text-gray-400 mb-4">
+                  AI-powered chatbot that helps students navigate campus
+                  resources, schedules, and academic information.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >NLP</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >Flask</span
+                  >
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                    >PostgreSQL</span
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Project 5 -->
+            <a href="https://vivekrai-gif.github.io/VivekRai-gif-Valentine-Vibes-Your-Gen-Z-Love-Hub/" target="_blank" class="block">
+            <div class="bg-[#1E1E1E] rounded-lg overflow-hidden">
+              <img
+                src="valentine.png"
+                alt="Valentine Vibes"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">Valentine Vibes</h3>
+                <p class="text-gray-400 mb-4">
+                  A personalized Valentine's Week platform with love calculators, AI-generated romantic messages, gift suggestions, date ideas, and interactive games for couples and friends.                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">React.js</span>
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">Node.js</span>
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">MongoDB</span>
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">OpenAI GPT</span>
+                  <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">Google Maps API</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Contact Section (Hidden by default) -->
+        <section id="contact" class="py-12 px-8 md:px-16 hidden">
+          <h2 class="text-4xl font-bold mb-4">Contact Me</h2>
+          <div class="w-20 h-1 bg-primary mb-8"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Form -->
+            <div class="bg-[#1E1E1E] p-8 rounded-lg">
+              <h3 class="text-2xl font-bold mb-6">Send Message</h3>
+              <form
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                class="space-y-6"
+              >
+                <!-- Hidden Access Key -->
+                <input type="hidden" name="access_key" value="bcd5e63a-d8dd-4685-bdd4-977514d96fd0" />
+              
+                <!-- Name Field -->
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="w-full px-4 py-3 rounded-lg"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+              
+                <!-- Email Field -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Your Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="w-full px-4 py-3 rounded-lg"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+              
+                <!-- Message Field -->
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    class="w-full px-4 py-3 rounded-lg resize-none"
+                    placeholder="Enter your message"
+                    required
+                  ></textarea>
+                </div>
+              
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  class="w-full bg-primary text-gray-900 py-3 px-6 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+            <!-- Contact Information -->
+            <div class="space-y-8">
+              <div class="bg-[#1E1E1E] p-8 rounded-lg">
+                <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <div
+                      class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4"
+                    >
+                      <i class="ri-map-pin-line text-primary text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold">Location</h4>
+                      <p class="text-gray-400">San Francisco, California</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div
+                      class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4"
+                    >
+                      <i class="ri-mail-line text-primary text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold">Email</h4>
+                      <p class="text-gray-400">alex.mitchell@example.com</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div
+                      class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4"
+                    >
+                      <i class="ri-phone-line text-primary text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold">Phone</h4>
+                      <p class="text-gray-400">+1 (555) 234-5678</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Availability Status -->
+              <div class="bg-[#1E1E1E] p-8 rounded-lg">
+                <h3 class="text-2xl font-bold mb-6">Availability</h3>
+                <div class="space-y-4">
+                  <div class="flex items-center">
+                    <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                    <p class="text-gray-300">
+                      Available for freelance projects
+                    </p>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                    <p class="text-gray-300">Part-time opportunities</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const contactForm = document.getElementById("contactForm");
+            contactForm.addEventListener("submit", function (e) {
+              e.preventDefault();
+              const formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                subject: document.getElementById("subject").value,
+                message: document.getElementById("message").value,
+              };
+              // Here you would typically send the data to a server
+              console.log("Form submitted:", formData);
+              // Clear form
+              contactForm.reset();
+              // Show success message
+              const successMessage = document.createElement("div");
+              successMessage.className =
+                "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg";
+              successMessage.textContent = "Message sent successfully!";
+              document.body.appendChild(successMessage);
+              // Remove success message after 3 seconds
+              setTimeout(() => {
+                successMessage.remove();
+              }, 3000);
+            });
+          });
+        </script>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Remove active class from all links
+            navLinks.forEach((link) => link.classList.remove("active"));
+            // Add active class to clicked link
+            this.classList.add("active");
+            // Hide all sections
+            sections.forEach((section) => section.classList.add("hidden"));
+            // Show the target section
+            const targetId = this.getAttribute("href").substring(1);
+            document.getElementById(targetId).classList.remove("hidden");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
